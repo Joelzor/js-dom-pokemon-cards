@@ -29,13 +29,13 @@ function createImage(pokemonCard, liCard) {
   liCard.appendChild(image);
 }
 
-function createBackImage(pokemonCard, liCard) {
-  const image2 = document.createElement("img");
-  image2.src = pokemonCard.sprites.other["official-artwork"].front_default;
-  image2.setAttribute("width", "256");
-  image2.classList.add("card--img-back");
-  liCard.appendChild(image2);
-}
+// function createBackImage(pokemonCard, liCard) {
+//   const image2 = document.createElement("img");
+//   image2.src = pokemonCard.sprites.other["official-artwork"].front_default;
+//   image2.setAttribute("width", "256");
+//   image2.classList.add("card--img-back");
+//   liCard.appendChild(image2);
+// }
 
 function createCardText(pokemonCard, liCard) {
   const ul = document.createElement("ul");
@@ -66,19 +66,30 @@ data.forEach((pokemonCard) => {
   createCard(liCard);
   createTitle(pokemonCard, liCard);
   createImage(pokemonCard, liCard);
-  createBackImage(pokemonCard, liCard);
+  // createBackImage(pokemonCard, liCard);
   createCardText(pokemonCard, liCard);
   createGameList(pokemonCard, liCard);
-});
 
-const liCard = document.querySelectorAll(".card");
-
-liCard.forEach((card) => {
-  card.addEventListener("click", () => {
-    const cardImg = document.querySelectorAll(".card--img");
-    for (let i = 0; i < cardImg.length; i++) {
-      cardImg[i].classList.toggle("disappear");
+  liCard.addEventListener("click", () => {
+    const img = liCard.querySelector("img");
+    if (
+      img.src === pokemonCard.sprites.other["official-artwork"].front_default
+    ) {
+      img.src = pokemonCard.sprites.other.dream_world.front_default;
+    } else {
+      img.src = pokemonCard.sprites.other["official-artwork"].front_default;
     }
-    // cardImg.classList.remove(".card--img-back");
   });
 });
+
+// const liCard = document.querySelectorAll(".card");
+
+// liCard.forEach((card) => {
+//   card.addEventListener("click", () => {
+//     const cardImg = document.querySelectorAll(".card--img");
+//     for (let i = 0; i < cardImg.length; i++) {
+//       cardImg[i].classList.toggle("disappear");
+//     }
+//     // cardImg.classList.remove(".card--img-back");
+//   });
+// });
