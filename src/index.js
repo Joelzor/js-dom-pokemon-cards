@@ -1,8 +1,8 @@
-console.log(data);
+// console.log(data);
 
 //You can start simple and just render a single
 //pokemon card from the first element
-console.log(data[0]);
+// console.log(data[0]);
 
 function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -27,6 +27,14 @@ function createImage(pokemonCard, liCard) {
   image.setAttribute("width", "256");
   image.classList.add("card--img");
   liCard.appendChild(image);
+}
+
+function createBackImage(pokemonCard, liCard) {
+  const image2 = document.createElement("img");
+  image2.src = pokemonCard.sprites.other["official-artwork"].front_default;
+  image2.setAttribute("width", "256");
+  image2.classList.add("card--img-back");
+  liCard.appendChild(image2);
 }
 
 function createCardText(pokemonCard, liCard) {
@@ -58,8 +66,19 @@ data.forEach((pokemonCard) => {
   createCard(liCard);
   createTitle(pokemonCard, liCard);
   createImage(pokemonCard, liCard);
+  createBackImage(pokemonCard, liCard);
   createCardText(pokemonCard, liCard);
   createGameList(pokemonCard, liCard);
 });
 
-liCard.addEventListener("click", () => {});
+const liCard = document.querySelectorAll(".card");
+
+liCard.forEach((card) => {
+  card.addEventListener("click", () => {
+    const cardImg = document.querySelectorAll(".card--img");
+    for (let i = 0; i < cardImg.length; i++) {
+      cardImg[i].classList.toggle("disappear");
+    }
+    // cardImg.classList.remove(".card--img-back");
+  });
+});
